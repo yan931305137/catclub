@@ -1,0 +1,19 @@
+server:
+  port: 9002
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: yudaoyuanma # 路由的编号
+          uri: http://www.iocoder.cn # 路由到的目标地址
+          predicates: # 断言，作为路由的匹配条件
+            - Path=/blog
+          filters:
+            - StripPrefix=1
+        - id: oschina # 路由的编号
+          uri: https://www.oschina.net # 路由的目标地址
+          predicates: # 断言，作为路由的匹配条件
+            - Path=/oschina
+          filters: # 过滤器，对请求进行拦截
+            - StripPrefix=1
